@@ -1,0 +1,25 @@
+{
+  "name": "UP-testing",
+  "version": "0.0.1",
+  "author": "Gianfranco Cecconi <gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk>",
+  "description": "Does what it says on the tin.",
+  "contributors": [ 
+    {
+      "name": "Gianfranco Cecconi",
+      "email": "gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk"
+    } 
+  ],
+  "keywords": [
+    "Spotify"
+  ],
+  "dependencies" : {
+    "async": ">=0.2.9",
+    "optimist": ">=0.6.0",
+    "request": ">=2.27.0",
+    "underscore": ">=1.5.2"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.21"
+  }
+}
