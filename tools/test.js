@@ -13,18 +13,22 @@ var argv = require('optimist')
 
 
 var saveToCsv = function (filename, items, callback) {
-	csv()
-        .from.array(
-            items, 
-            { columns: true })
-        .to.options({ columns: _.keys(items[0]), header: true })
-        .to.path(filename)
-        .on('error', function (err) {
-			if (callback) callback(err);
-		})
-        .on('end', function (count) {
-			if (callback) callback(err);
-        });
+	if (items.length == 0) {
+		if (callback) callback(err);
+	} else {
+		csv()
+	        .from.array(
+	            items, 
+	            { columns: true })
+	        .to.options({ columns: _.keys(items[0]), header: true })
+	        .to.path(filename)
+	        .on('error', function (err) {
+				if (callback) callback(err);
+			})
+	        .on('end', function (count) {
+				if (callback) callback(err);
+	        });
+    }
 }
 
 var RDateToDate = function (s) {
@@ -48,6 +52,13 @@ new UPSession(argv.email, argv.password, function (err, s) {
 			var toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),
 				fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000);
 			s.sleeps(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
+				saveToCsv(argv.out, items);
+			});
+			break;
+		case 'sleepssnapshot':
+			var toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),
+				fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000);
+			s.sleepsSnapshot(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
 				saveToCsv(argv.out, items);
 			});
 			break;
