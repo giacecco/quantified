@@ -1,3 +1,5 @@
+var DEFAULT_TIME_WINDOW = 7; // days
+
 var argv = require('optimist') 
 		.usage('Usage: $0 command --email email --password password --out filename')
 		.demand([ 'email', 'password', 'out' ])
@@ -26,7 +28,6 @@ var saveToCsv = function (filename, items, callback) {
 }
 
 var RDateToDate = function (s) {
-	console.log(s);
 	var d = s.split(" ")
 		t = d[1];
 	d = d[0].split("-"); 
@@ -37,10 +38,16 @@ var command = (argv._[0] || "").toLowerCase();
 new UPSession(argv.email, argv.password, function (err, s) {
 	switch (command) {
 		case 'band':
-			var fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(new Date() - 7 * 24 * 60 * 60 * 1000),
-				toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date();
-			console.log(fromDate, toDate);
+			var toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),
+				fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000);
 			s.band(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
+				saveToCsv(argv.out, items);
+			});
+			break;
+		case 'sleeps':
+			var toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),
+				fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000);
+			s.sleeps(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
 				saveToCsv(argv.out, items);
 			});
 			break;
