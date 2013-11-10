@@ -10,11 +10,12 @@
     } 
   ],
   "keywords": [
-    "Spotify"
+    "Jawbone",
+    "UP",
+    "band",
+    "quantified self"
   ],
   "dependencies" : {
-    "async": ">=0.2.9",
-    "optimist": ">=0.6.0",
     "request": ">=2.27.0",
     "underscore": ">=1.5.2"
   },

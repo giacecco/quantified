@@ -1,0 +1,27 @@
+{
+  "name": "UP-testing",
+  "version": "0.0.1",
+  "author": "Gianfranco Cecconi <gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk>",
+  "description": "Does what it says on the tin.",
+  "contributors": [ 
+    {
+      "name": "Gianfranco Cecconi",
+      "email": "gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk"
+    } 
+  ],
+  "keywords": [
+    "Jawbone",
+    "UP",
+    "band",
+    "quantified self"
+  ],
+  "dependencies" : {
+    "csv": ">=0.3.6",
+    "optimist": ">=0.6.0",
+    "underscore": ">=1.5.2"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.21"
+  }
+}
