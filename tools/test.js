@@ -62,6 +62,13 @@ new UPSession(argv.email, argv.password, function (err, s) {
 				saveToCsv(argv.out, items);
 			});
 			break;
+		case 'workouts':
+			var toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),
+				fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000);
+			s.workouts(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
+				saveToCsv(argv.out, items);
+			});
+			break;
 		default:
 			console.log("Command not recognised.");
 			break;
