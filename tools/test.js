@@ -25,11 +25,22 @@ var saveToCsv = function (filename, items, callback) {
         });
 }
 
+var RDateToDate = function (s) {
+	console.log(s);
+	var d = s.split(" ")
+		t = d[1];
+	d = d[0].split("-"); 
+	return new Date(d[0] + "/" + d[1] + "/" + d[2] + " " + t); 
+}
+
 var command = (argv._[0] || "").toLowerCase();
 new UPSession(argv.email, argv.password, function (err, s) {
 	switch (command) {
 		case 'band':
-			s.band(1382885000, 1383487651, function (err, items) {
+			var fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(new Date() - 7 * 24 * 60 * 60 * 1000),
+				toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date();
+			console.log(fromDate, toDate);
+			s.band(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
 				saveToCsv(argv.out, items);
 			});
 			break;
