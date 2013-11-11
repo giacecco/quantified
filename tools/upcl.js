@@ -18,9 +18,7 @@ var toCsv = function (items, callback) {
 		if (callback) callback(err, "");
 	} else {
 		csv()
-	        .from.array(
-	            items, 
-	            { columns: true })
+	        .from.array(items)
 	        .to.options({ columns: _.keys(items[0]), header: true })
 	        .to.string(function (data, count) {
 				if (callback) callback(null, data)	        	
