@@ -1,8 +1,8 @@
 var DEFAULT_TIME_WINDOW = 7; // days
 
 var argv = require('optimist') 
-		.usage('Usage: $0 command --email email --password password --out filename')
-		.demand([ 'email', 'password', 'out' ])
+		.usage('Usage: $0 command --email email --password password [--out filename]')
+		.demand([ 'email', 'password' ])
 		.alias('email', 'e')
 		.alias('password', 'p')
 		.alias('out', 'o')
