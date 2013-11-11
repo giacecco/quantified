@@ -13,7 +13,7 @@ The project is in its very early stages. Data extraction is supported only for t
 ####Jawbone Up (upcl)
     node ./upcl.js command --email email --password password [--csv jpath]
 
-Returns the raw JSON output of the execution of the _/nudge/api/users/user_xid/band_ API. _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepssnapshot](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready). 
+Returns the raw JSON output of the execution of the _/nudge/api/users/user_xid/band_ API. _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepsDetail](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready). 
 
 In the name of not risking polluting / compromising the data in any way, please note that the values returned by the API are not processed and this can be occasionally inconvenient, e.g. dates are expressed as seconds from epoch rather than JavaScript's standard of milliseconds from epoch.  
 
@@ -55,6 +55,13 @@ we will be saving a csv file named _band.csv_, with one line being created for e
     27,27,,1.66470658779,41,1380588480,1
     3,2,,0.167267397046,4,1380588540,1
     (...)
+
+Suggested jpaths are, for each command:
+
+- band: data.ticks.value
+- sleeps: data.items.details
+
+
 
 ##Credits
 
