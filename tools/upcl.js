@@ -99,12 +99,13 @@ var print = function (err, result, callback) {
 
 var argv = require('optimist') 
 		.usage('Usage: $0 command --email email --password password [--jpath jpath] [--csv] [--rfriendly]')
-		.demand([ 'email', 'password' ])
+		.demand([ 'email' ])
 		.alias('csv', 'c')
 		.alias('email', 'e')
 		.alias('jpath', 'j')
 		.alias('password', 'p')
 		.alias('rfriendly', 'r')
+		.default('password', process.env.UPCL_PASSWORD)
 		.argv,
 	csv = require("csv"),
 	jpath = require("node-jpath"),
