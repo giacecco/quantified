@@ -17,6 +17,7 @@
   ],
   "dependencies" : {
     "csv": ">=0.3.6",
+    "node-jpath": ">=2.1.0",
     "optimist": ">=0.6.0",
     "underscore": ">=1.5.2"
   },
