@@ -1,32 +1,29 @@
 var DEFAULT_TIME_WINDOW = 7; // days
 
 var argv = require('optimist') 
-		.usage('Usage: $0 command --email email --password password [--out filename]')
+		.usage('Usage: $0 command --email email --password password [--csv jpath]')
 		.demand([ 'email', 'password' ])
+		.alias('csv', 'c')
 		.alias('email', 'e')
 		.alias('password', 'p')
-		.alias('out', 'o')
 		.argv,
 	csv = require("csv"),
+	jpath = require("node-jpath"),
 	_ = require("underscore"),
 	UPSession = require("../lib/up").Up;
 
 
-var saveToCsv = function (filename, items, callback) {
+var toCsv = function (items, callback) {
 	if (items.length == 0) {
-		if (callback) callback(err);
+		if (callback) callback(err, "");
 	} else {
 		csv()
 	        .from.array(
 	            items, 
 	            { columns: true })
 	        .to.options({ columns: _.keys(items[0]), header: true })
-	        .to.path(filename)
-	        .on('error', function (err) {
-				if (callback) callback(err);
-			})
-	        .on('end', function (count) {
-				if (callback) callback(err);
+	        .to.string(function (data, count) {
+				if (callback) callback(null, data)	        	
 	        });
     }
 }
@@ -44,8 +41,14 @@ new UPSession(argv.email, argv.password, function (err, s) {
 		case 'band':
 			var toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),
 				fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000);
-			s.band(fromDate.valueOf(), toDate.valueOf(), function (err, items) {
-				saveToCsv(argv.out, items);
+			s.band(fromDate.valueOf(), toDate.valueOf(), function (err, result) {
+				if (!argv.csv) {
+					console.log(JSON.stringify(result));
+				} else {
+					toCsv(jpath.filter(result, argv.csv), function (err, csv) {
+						console.log(csv);
+					});
+				}
 			});
 			break;
 		case 'sleeps':
