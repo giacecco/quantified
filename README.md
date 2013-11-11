@@ -6,6 +6,15 @@ The objective of this project is to build a Nodejs library capable of interfacin
 ##Status
 The project is in its very early stages. Data extraction is supported only for the Jawbone UP. The design of the device-agnostic API has not started. 
 
+##Usage
+
+###Command line tools
+
+####Jawbone Up
+    node ./upcl.js command --email email --password password [--out filename]
+
+where command is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepssnapshot](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready).
+
 ##Credits
 
 ###Jawbone UP
