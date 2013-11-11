@@ -1,6 +1,5 @@
 *.swp
 *.csv
-private
 node_modules
 .Rhistory
 .Rproj.user
