@@ -6,6 +6,10 @@ The objective of this project is to build a Nodejs library capable of interfacin
 ##Status
 The project is in its very early stages. Data extraction is supported only for the Jawbone UP. The design of the cross-device API has not started. 
 
+##Supported devices
+- Jawbone UP: all versions
+Candidates: [Fitbit](http://www.fitbit.com/uk), [Moves (app only)](http://www.moves-app.com)
+
 ##Usage
 
 ###Command line tools

@@ -110,7 +110,7 @@ var argv = require('optimist')
 	csv = require("csv"),
 	jpath = require("node-jpath"),
 	_ = require("underscore"),
-	UPSession = require("../lib/up").Up;
+	UPSession = require("../lib/main").Up;
 
 var command = _.contains(['band', 'sleeps', 'sleepsdetail', 'workouts'], (argv._[0].toLowerCase() || "")) ? argv._[0].toLowerCase() : undefined,
 	toDate = argv.toDate ? RDateToDate(argv.toDate + " 23:59:59") : new Date(),

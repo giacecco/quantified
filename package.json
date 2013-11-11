@@ -1,0 +1,46 @@
+{
+  "name": "Quantified",
+  "version": "0.0.1",
+  "author": "Gianfranco Cecconi <gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk>",
+  "description": "The objective of the project is to build a Nodejs library capable of interfacing the mainstream health and fitness trackers and to export their data in a way that is consistent across different brands and devices. This will allow to run data analysis on larger populations of users who are willing to offer access to their personal data, e.g. for medical research.",
+  "author": {
+    "name": "Gianfranco Cecconi",
+    "email": "gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk",
+    "url": "http://www.digitalcontraptionsimaginarium.co.uk"
+  },
+  "contributors": [ 
+    {
+      "name": "Gianfranco Cecconi",
+      "email": "gianfranco.cecconi@digitalcontraptionsimaginarium.co.uk"
+    } 
+  ],
+  "homepage": "https://github.com/giacecco/quantified",
+  "repository": { 
+    "type": "git", 
+    "url": "git://github.com/giacecco/quantified.git"
+  },
+  "bugs": { 
+    "url": "https://github.com/giacecco/quantified/issues" 
+  },
+  "keywords": [
+    "Jawbone", "UP",
+    "Fitbit", "Flex", "Zip", "One", "Aria",
+    "Nike", "Fuel",
+    "band", "quantified self", "self hacking"
+  ],
+  "main": "./lib/main",
+  "dependencies" : {
+    "async": ">=0.2.9",
+    "request": ">=2.27.0",
+    "underscore": ">=1.5.2"
+  },
+  "devDependencies": {
+    "csv": ">=0.3.6",
+    "node-jpath": ">=2.1.0",
+    "optimist": ">=0.6.0"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.10.21"
+  }
+}
