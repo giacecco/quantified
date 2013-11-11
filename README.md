@@ -13,9 +13,13 @@ The project is in its very early stages. Data extraction is supported only for t
 ####Jawbone Up (upcl)
     node ./upcl.js command --email email --password password [--csv jpath]
 
-Returns the raw JSON output of the execution of the _/nudge/api/users/user_xid/band_ API. _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepssnapshot](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready), while _email_ and _password_ are the credentials required to authenticate on the Jawbone servers.
+Returns the raw JSON output of the execution of the _/nudge/api/users/user_xid/band_ API. _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepssnapshot](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready). 
 
-Alternatively, the tool can output to csv format, but in that case it is necessary to specify one point in the original JSON structure that can be 'flattened' to csv. This is achieved by specifying a 'jpath', that is a JSON equivalent to XPath. See the [node-jPath project page](https://github.com/stsvilik/node-jpath) to find out more.
+In the name of not risking polluting / compromising the data in any way, please note that the values returned by the API are not processed and this can be occasionally inconvenient, e.g. dates are expressed as seconds from epoch rather than JavaScript's standard of milliseconds from epoch.  
+
+_email_ and _password_ are the credentials required to authenticate on the Jawbone servers.
+
+Alternatively, the tool can output to CSV ormat, but in that case it is necessary to specify one point in the original JSON structure that is an array of objects and that can be 'flattened' to CSV unambiguously. This is achieved by specifying a 'jpath', that is an XPath-like way of specifying a location in the JSON structure (see the [node-jPath project page](https://github.com/stsvilik/node-jpath) to find out more).
 
 If, for example, the API returned:
 
