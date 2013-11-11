@@ -9,7 +9,7 @@ var argv = require('optimist')
 		.argv,
 	csv = require("csv"),
 	_ = require("underscore"),
-	UPSession = require("../lib/UPSession").UPSession;
+	UPSession = require("../lib/up").Up;
 
 
 var saveToCsv = function (filename, items, callback) {
