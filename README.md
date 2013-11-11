@@ -11,7 +11,7 @@ The project is in its very early stages. Data extraction is supported only for t
 ###Command line tools
 
 ####Jawbone Up (upcl)
-    node ./upcl.js command --email email --password password [--csv jpath]
+    node ./upcl.js command --email email --password password [--jpath jpath] [--csv] [--rfriendly]
 
 Returns the raw JSON output of the execution of the _/nudge/api/users/user_xid/band_ API. _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepsDetail](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready). 
 
@@ -19,7 +19,9 @@ In the name of not risking polluting / compromising the data in any way, please 
 
 _email_ and _password_ are the credentials required to authenticate on the Jawbone servers.
 
-Alternatively, the tool can output to CSV ormat, but in that case it is necessary to specify one point in the original JSON structure that is an array of objects and that can be 'flattened' to CSV unambiguously. This is achieved by specifying a 'jpath', that is an XPath-like way of specifying a location in the JSON structure (see the [node-jPath project page](https://github.com/stsvilik/node-jpath) to find out more).
+When specifying a jpath (an XPath-like way of specifying a location in the JSON structure; see the [node-jPath project page](https://github.com/stsvilik/node-jpath)) only that part of the data is returned.
+
+Alternatively, the tool can output to CSV format with the --csv option. In that case it is also necessary to specify a --jpath pointing to a point in the original JSON structure that is an array of objects and that can be 'flattened' to CSV unambiguously. 
 
 If, for example, the API returned:
 
@@ -47,7 +49,7 @@ If, for example, the API returned:
 
 the jPath path we are interested in is _data.ticks.value_. If we then run:
 
-    node upcl.js band --fromDate 2013-10-01 --toDate 2013-10-31 -e john-appleseed@mac.com -p password --csv data.ticks.value > band.csv
+    node upcl.js band --fromDate 2013-10-01 --toDate 2013-10-31 -e john-appleseed@mac.com -p password --csv --json data.ticks.value > band.csv
 
 we will be saving a csv file named _band.csv_, with one line being created for every item in 'data.ticks', with one column for every property in the 'value' property of each item. The file contents will look like:
 
@@ -56,11 +58,7 @@ we will be saving a csv file named _band.csv_, with one line being created for e
     3,2,,0.167267397046,4,1380588540,1
     (...)
 
-Suggested jpaths are, for each command:
-
-- band: data.ticks.value
-- sleeps: data.items.details
-
+Finally, the --rfriendly option produces R-friendly CSV files, and it replaces the joint use of the options --csv and --jpath to pre-selected suitable points. E.g. when executing the _band_ command, using --rfriendly is equivalent to doing --csv --json data.ticks.value .
 
 
 ##Credits
