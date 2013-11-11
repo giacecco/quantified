@@ -11,9 +11,46 @@ The project is in its very early stages. Data extraction is supported only for t
 ###Command line tools
 
 ####Jawbone Up (upcl)
-    node ./upcl.js command --email email --password password [--out filename]
+    node ./upcl.js command --email email --password password [--csv jpath]
 
-where _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepssnapshot](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready), while _email_ and _password_ are the credentials required to authenticate on the Jawbone servers.
+Returns the raw JSON output of the execution of the _/nudge/api/users/user_xid/band_ API. _command_ is one of: [band](http://eric-blue.com/projects/up-api/#JawboneUPAPI-DetailedActivityData), [sleeps](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepSummaryData), [sleepssnapshot](http://eric-blue.com/projects/up-api/#JawboneUPAPI-SleepDetailedData%28Snapshot%29), [workouts](http://eric-blue.com/projects/up-api/#JawboneUPAPI-WorkoutSummaryData) (to be expanded as ready), while _email_ and _password_ are the credentials required to authenticate on the Jawbone servers.
+
+Alternatively, the tool can output to csv format, but in that case it is necessary to specify one point in the original JSON structure that can be 'flattened' to csv. This is achieved by specifying a 'jpath', that is a JSON equivalent to XPath. See the [node-jPath project page](https://github.com/stsvilik/node-jpath) to find out more.
+
+If, for example, the API returned:
+
+    { "meta": { "user_xid": "[removed]", "message":"OK", "code":200, "time":1384158919 },
+      "data": { "ticks": [
+						   { "value": {
+						   		"distance": 27,
+						   		"active_time": 27,
+						   		"aerobic": false,
+						   		"calories": 1.66470658779,
+						   		"steps": 41,
+						   		"time": 1380588480,
+						   		"speed": 1 }
+						   },
+						   { "value": {
+						   		"distance": 3,
+						   		"active_time": 2,
+						   		"aerobic": false,
+						   		"calories": 0.167267397046,
+						   		"steps": 4,
+						   		"time": 1380588540,
+						   		"speed": 1 }
+						   },
+						   (...)
+
+the jPath path we are interested in is _data.ticks.value_. If we then run:
+
+    node upcl.js band --fromDate 2013-10-01 --toDate 2013-10-31 -e john-appleseed@mac.com -p password --csv data.ticks.value > band.csv
+
+we will be saving a csv file named _band.csv_, with one line being created for every item in 'data.ticks', with one column for every property in the 'value' property of each item. The file contents will look like:
+
+    distance,active_time,aerobic,calories,steps,time,speed
+    27,27,,1.66470658779,41,1380588480,1
+    3,2,,0.167267397046,4,1380588540,1
+    (...)
 
 ##Credits
 
