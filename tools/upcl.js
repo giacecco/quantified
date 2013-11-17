@@ -98,13 +98,15 @@ var print = function (err, result, callback) {
 }
 
 var argv = require('optimist') 
-		.usage('Usage: $0 command --email email --password password [--jpath jpath] [--csv] [--rfriendly]')
+		.usage('Usage: $0 command --email <email> [--password <password>] --fromDate <date> --toDate <date> [--jpath <jpath>] [--csv] [--rfriendly]')
 		.demand([ 'email' ])
 		.alias('csv', 'c')
 		.alias('email', 'e')
+		.alias('fromDate', 'd')
 		.alias('jpath', 'j')
 		.alias('password', 'p')
 		.alias('rfriendly', 'r')
+		.alias('toDate', 't')
 		.argv,
 	csv = require("csv"),
 	jpath = require("node-jpath"),
