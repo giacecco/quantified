@@ -8,6 +8,7 @@ The project is in its very early stages. Data extraction is supported only for t
 
 ##Supported devices
 - Jawbone UP: all versions
+
 Candidates: [Fitbit](http://www.fitbit.com/uk), [Moves (app only)](http://www.moves-app.com)
 
 ##Usage

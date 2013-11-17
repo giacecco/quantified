@@ -105,7 +105,6 @@ var argv = require('optimist')
 		.alias('jpath', 'j')
 		.alias('password', 'p')
 		.alias('rfriendly', 'r')
-		.default('password', process.env.UPCL_PASSWORD)
 		.argv,
 	csv = require("csv"),
 	jpath = require("node-jpath"),
@@ -117,6 +116,7 @@ var command = _.contains(['band', 'sleeps', 'sleepsdetail', 'workouts'], (argv._
 	fromDate = argv.fromDate ? RDateToDate(argv.fromDate + " 0:00:00") : new Date(toDate - DEFAULT_TIME_WINDOW * 86400000),
 	transformation = function (item) { return item; }; // the default transformation function
 
+argv.password = argv.password || process.env.UPCL_PASSWORD;
 if ((command != "") && argv.rfriendly) {
 	argv.csv = true;
 	argv.jpath = RFRIENDLY_TRASFORMATIONS[command].jpath;

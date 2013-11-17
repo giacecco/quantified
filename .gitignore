@@ -1,5 +1,7 @@
 *.swp
 *.csv
 node_modules
+samples
+.Rdata
 .Rhistory
 .Rproj.user
