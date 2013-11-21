@@ -1,5 +1,7 @@
 #Quantified
 
+![nodei.co npm status](https://nodei.co/npm/quantified.png)
+
 ##Objectives
 The objective of this project is to build a Nodejs library capable of interfacing the mainstream health and fitness trackers and to export their data in a way that is consistent across different brands and devices. This will allow to run data analysis on larger populations of users who are willing to offer access to their personal data, e.g. for medical research.
 
